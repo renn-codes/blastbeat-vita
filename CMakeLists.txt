@@ -25,7 +25,7 @@ include("${VITASDK}/share/vita.cmake" REQUIRED)
 set(VITA_APP_NAME "BLASTbeat Raiders")
 # Unique ID must be exactly 9 characters. Recommended: XXXXYYYYY where X =
 # unique string of developer and Y = a unique number for this app
-set(VITA_TITLEID  "ZTDV12301")
+set(VITA_TITLEID  "ZTDV01001")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION  "01.00")
 
@@ -49,8 +49,12 @@ link_directories(
 ## Build and link
 # Add all the files needed to compile here
 add_executable(${PROJECT_NAME}
-        main.cpp
-        image.png
+        src/main.cpp
+        src/ztcommon.cpp
+        src/demo.cpp
+        src/ztactor.cpp
+        src/SPRMask.cpp
+        lib/piclib.c
 )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -62,14 +66,16 @@ target_link_libraries(${PROJECT_NAME}
         SceGxm_stub
         SceSysmodule_stub
         SceCtrl_stub
-        ScePgf_stub
+        ScePvf_stub
         SceCommonDialog_stub
-        -lfreetype
-        -lpng
-        -ljpeg
-        -lz
-        -lm
-        -lc
+        -lfreetype #
+        -lpng #
+        -ljpeg #
+        -lz #
+        -lm #
+        -lc #
+        stdc++
+        pthread
 )
 
 ## Create Vita files
